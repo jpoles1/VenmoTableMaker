@@ -2,11 +2,13 @@ var dat;
 $(function(){
 	$("#keysubmit").click(function(){
 		var key = $("#apikey").val();
-		$("#content").html("<a id='venmolink' href='https://api.venmo.com/v1/payments?limit=300&access_token="+key+"' target='blank'>Click here to get venmo data</a>");
+		var limit = $("#apilimit").val();
+		$("#content").html("<a id='venmolink' href='https://api.venmo.com/v1/payments?limit="+limit+"&access_token="+key+"' target='blank'>Click here to get venmo data</a>");
 		return false;
 	});
 	$("#content").on('click', "#venmolink", function(){
-		$("#content").html("<form><b>Venmo Data:</b> <input id='venmodat' type='text' maxlength='1000000'><input type='submit' value='Submit' id='datsubmit'></form>");
+		$("#content").html("<form><b>Venmo Data:</b> <input id='venmodat' type='text' maxlength='1000000'><a href='#' id='test'>Send</a><input type='submit' value='Submit' id='datsubmit'></form>");
+		$("#content").html("<form><b>Venmo Data:</b> <textarea id='venmodat'></textarea><input type='submit' value='Submit' id='datsubmit'></form>");
 	});
 	$("#content").on('click', "#datsubmit", function(){
 		console.log($("#venmodat").val().length);
@@ -37,3 +39,4 @@ function makeTable(){
 //EMAIL: wiessparties@gmail.com
 //PASS: wiessvenmo6340
 //API access: https://api.venmo.com/v1/payments?access_token=mW386FYUQVYX46U6cn7fKukmSfTZYKYh&limit=1000
+//mW386FYUQVYX46U6cn7fKukmSfTZYKYh
