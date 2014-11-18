@@ -1,13 +1,20 @@
 var dat;
 $(function(){
+	$( "#apiafterdate" ).datepicker();
 	$("#keysubmit").click(function(){
 		var key = $("#apikey").val();
 		var limit = $("#apilimit").val();
-		$("#content").html("<a id='venmolink' href='https://api.venmo.com/v1/payments?limit="+limit+"&access_token="+key+"' target='blank'>Click here to get venmo data</a>");
+		var afterdate = $("#apiafterdate").val();
+		if(afterdate != ""){
+			var date = new Date(Date.parse(afterdate)).toISOString();
+			$("#content").html("<a id='venmolink' href='https://api.venmo.com/v1/payments?limit="+limit+"&after="+date+"&access_token="+key+"' target='blank'>Click here to get venmo data</a>");
+		}
+		else{
+			$("#content").html("<a id='venmolink' href='https://api.venmo.com/v1/payments?limit="+limit+"&access_token="+key+"' target='blank'>Click here to get venmo data</a>");
+		}
 		return false;
 	});
 	$("#content").on('click', "#venmolink", function(){
-		$("#content").html("<form><b>Venmo Data:</b> <input id='venmodat' type='text' maxlength='1000000'><a href='#' id='test'>Send</a><input type='submit' value='Submit' id='datsubmit'></form>");
 		$("#content").html("<form><b>Venmo Data:</b> <textarea id='venmodat'></textarea><input type='submit' value='Submit' id='datsubmit'></form>");
 	});
 	$("#content").on('click', "#datsubmit", function(){
@@ -26,7 +33,7 @@ function makeTable(){
 	colnames.append("<td><b>Date Paid</b></td>");
 	$("#transactions").append(colnames);
 	$.each(dat.data, function(i, trans){
-		if(trans.status == "settled" && (trans.action == "pay" || trans.action == "charge")){
+		if(trans.status == "settled" &&  trans.target.user.username=="wiess"){
 			tr = $('<tr/>');
 			tr.append("<td>" + trans.actor.first_name + " " + trans.actor.last_name + "</td>");
 			tr.append("<td>" + trans.amount + "</td>");
