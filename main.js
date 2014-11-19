@@ -43,7 +43,3 @@ function makeTable(){
 		}
 	});
 }
-//EMAIL: wiessparties@gmail.com
-//PASS: wiessvenmo6340
-//API access: https://api.venmo.com/v1/payments?access_token=mW386FYUQVYX46U6cn7fKukmSfTZYKYh&limit=1000
-//mW386FYUQVYX46U6cn7fKukmSfTZYKYh
